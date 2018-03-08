@@ -1,12 +1,12 @@
-SOURCE=driver.cpp
-OBJECT=driver.o
+SOURCE=predictor.cpp
+OBJECT=predictor.o
 EXEC=run
 CXX:= g++
 CXXFLAGS:= -c -Wall -I=.
 
 #------------------------------------------------
 
-all: link
+all: link test
 link: compile $(OBJECT)
 	$(CXX) -o $(EXEC) $(OBJECT)
 compile: $(SOURCE)
