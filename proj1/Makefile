@@ -1,5 +1,5 @@
-SOURCE=predictor.cpp
-OBJECT=predictor.o
+SOURCE=predictor.cpp branches.cpp
+OBJECT=predictor.o branches.o
 EXEC=run
 CXX:= g++
 CXXFLAGS:= -c -Wall -I=.
