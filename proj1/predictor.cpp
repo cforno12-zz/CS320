@@ -39,103 +39,153 @@ int main(int argc, char** argv){
     string T = "T";
     string NT = "NT";
 
-    // always(T, &input);
+    always(T, &input);
 
-    // input.clear();
-    // input.seekg(0);
+    input.clear();
+    input.seekg(0);
 
-    // always(NT, &input);
+    always(NT, &input);
 
-    // input.clear();
-    // input.seekg(0);
+    input.clear();
+    input.seekg(0);
 
     //==========================================================================
     //Bimodal Predictor wiht a single bit of history
 
-    // one_bit(16, &input);
+    one_bit(16, &input);
 
-    // input.clear();
-    // input.seekg(0);
+    input.clear();
+    input.seekg(0);
 
-    // one_bit(32, &input);
+    one_bit(32, &input);
 
-    // input.clear();
-    // input.seekg(0);
+    input.clear();
+    input.seekg(0);
 
-    // one_bit(128, &input);
+    one_bit(128, &input);
 
-    // input.clear();
-    // input.seekg(0);
+    input.clear();
+    input.seekg(0);
 
-    // one_bit(256, &input);
+    one_bit(256, &input);
 
-    // input.clear();
-    // input.seekg(0);
+    input.clear();
+    input.seekg(0);
 
-    // one_bit(512, &input);
+    one_bit(512, &input);
 
-    // input.clear();
-    // input.seekg(0);
+    input.clear();
+    input.seekg(0);
 
-    // one_bit(1024, &input);
+    one_bit(1024, &input);
 
-    // input.clear();
-    // input.seekg(0);
+    input.clear();
+    input.seekg(0);
 
 
-    // one_bit(2048, &input);
+    one_bit(2048, &input);
 
-    // input.clear();
-    // input.seekg(0);
+    input.clear();
+    input.seekg(0);
 
-    // cout << endl;
+    cout << endl;
 
     //==========================================================================
     //Bimodal Predictor with 2-bit saturating counters
 
-    // two_bit(16, &input);
+    two_bit(16, &input);
 
-    // input.clear();
-    // input.seekg(0);
+    input.clear();
+    input.seekg(0);
 
-    // two_bit(32, &input);
+    two_bit(32, &input);
 
-    // input.clear();
-    // input.seekg(0);
+    input.clear();
+    input.seekg(0);
 
-    // two_bit(128, &input);
+    two_bit(128, &input);
 
-    // input.clear();
-    // input.seekg(0);
+    input.clear();
+    input.seekg(0);
 
-    // two_bit(256, &input);
+    two_bit(256, &input);
 
-    // input.clear();
-    // input.seekg(0);
+    input.clear();
+    input.seekg(0);
 
-    // two_bit(512, &input);
+    two_bit(512, &input);
 
-    // input.clear();
-    // input.seekg(0);
+    input.clear();
+    input.seekg(0);
 
 
-    // two_bit(1024, &input);
+    two_bit(1024, &input);
 
-    // input.clear();
-    // input.seekg(0);
+    input.clear();
+    input.seekg(0);
 
-    // two_bit(2048, &input);
+    two_bit(2048, &input);
 
-    // input.clear();
-    // input.seekg(0);
+    input.clear();
+    input.seekg(0);
 
-    // cout << endl;
+    cout << endl;
 
     //==========================================================================
     // Gshare Predictor
 
     gshare(3, &input);
 
+    input.clear();
+    input.seekg(0);
+
+    gshare(4, &input);
+
+    input.clear();
+    input.seekg(0);
+
+    gshare(5, &input);
+
+    input.clear();
+    input.seekg(0);
+
+    gshare(6, &input);
+
+    input.clear();
+    input.seekg(0);
+
+    gshare(7, &input);
+
+    input.clear();
+    input.seekg(0);
+
+    gshare(8, &input);
+
+    input.clear();
+    input.seekg(0);
+
+    gshare(9, &input);
+
+    input.clear();
+    input.seekg(0);
+
+    gshare(10, &input);
+
+    input.clear();
+    input.seekg(0);
+
+    gshare(11, &input);
+
+    input.clear();
+    input.seekg(0);
+
+    cout << endl;
+
+    //==========================================================================
+    //Tournament Predictor
+
+
+    //tournament()
 
 
     return 0;
