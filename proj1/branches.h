@@ -4,6 +4,7 @@
 #ifndef BRAN_H
 #define BRAN_H
 
+void tournament(std::ifstream* in);
 void gshare_helper(int table[], char* branch, int index, unsigned int* history, int* predicted_right);
 unsigned int get_mask(unsigned int size);
 void two_bit_helper(int table[], char* branch, int* predicted_right, int index);

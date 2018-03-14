@@ -184,9 +184,7 @@ int main(int argc, char** argv){
     //==========================================================================
     //Tournament Predictor
 
-
-    //tournament()
-
+    tournament(&input);
 
     return 0;
 }
