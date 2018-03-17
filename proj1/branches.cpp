@@ -1,11 +1,74 @@
 #include <stdlib.h>
 #include <string.h>
 #include <limits.h>
+#include <vector>
 #include "branches.h"
 
 using namespace std;
 
-void tournament(ifstream* in){
+void perceptron(ifstream* in){
+    //output counters
+    //    int counter = 0;
+    //int predicted_right = 0;
+
+    //perceptron stuff
+    vector<int> global_history;
+    /* bit x_0 is always set to 1, providing a bias.*/
+    global_history[0] = 1;
+    vector<int> weights;
+    //int threshold;
+    vector<int> perceptron_table[2048];
+
+    //output (y) is a dot product of the weights and the input vector.
+    /* y = w_0 + \sum_{i=1}^{n} x_i * w_i */
+    // x_i is -1 (NT) or 1 (T)
+
+
+
+    //parsing stuff
+    string line;
+    const char delim[2] = " ";
+    char* token;
+
+
+    while(getline(*in, line)){
+        char* new_line = (char*) line.c_str();
+        token = strtok(new_line, delim);
+        unsigned int address = hexadecimalToDecimal(token);
+        int index = address % 2048;
+        vector<int> perceptron = perceptron_table[index];
+        /* Calculating output*/
+        int y = perceptron[0];
+        for(std::vector<int>::size_type i = 1; i < perceptron.size(); i++) {
+            y += (global_history[i]*weights[i]);
+        }
+
+        token = strtok(NULL, delim);
+        int t;
+        if(strcmp(token, "NT") == 0){
+            t = -1;
+        } else if(strcmp(token, "T") == 0){
+            t = 1;
+        } else {
+            fprintf(stderr, "Something wrong with perceptron predictor.\n");
+            exit(1);
+            t = 0;
+        }
+
+
+
+        // if(y != t || abs(y) <= threshold){
+        //     for (vector<int>::size_type i = 0; i < weights.size(); i++){
+        //         weights[i] = weights[i]+(t*global_history[i]);
+        //     }
+
+        // }
+
+    }
+
+}
+
+void tournament(ifstream* in, ofstream* out){
 
     //tournament stuff
     int selector_table[2048];
@@ -30,7 +93,7 @@ void tournament(ifstream* in){
     int bimodal_right = 0;
     int total_counter = 0;
 
-    //TODO: initialize tables
+    //TODO: initialize tables DONE
     for(int i = 0; i < 2048; i++){
         selector_table[i] = 0;
         bimodal_table[i] = 3;
@@ -145,7 +208,8 @@ void tournament(ifstream* in){
 
         total_counter++;
     }
-    printf("%d,%d;\n", predicted_right, total_counter);
+    *out << predicted_right << "," << total_counter << ";";
+    //printf("%d,%d;\n", predicted_right, total_counter);
 
 }
 
@@ -311,7 +375,7 @@ void gshare_helper(int table[], char* branch, int index, unsigned int* history, 
     }
 }
 
-void gshare(int history_size, ifstream* in){
+void gshare(int history_size, ifstream* in, ofstream* out){
     string line;
     int table[2048];
     const char delim[2] = " ";
@@ -343,11 +407,12 @@ void gshare(int history_size, ifstream* in){
         counter++;
     }
 
-    printf("%d,%d; ", predicted_right, counter);
+    *out << predicted_right << "," << counter << "; ";
+    //printf("%d,%d; ", predicted_right, counter);
 
 }
 
-void two_bit(int size, std::ifstream* in){
+void two_bit(int size, std::ifstream* in, ofstream* out){
     std::string line;
     int table[size];
     const char delim[2] = " ";
@@ -372,10 +437,12 @@ void two_bit(int size, std::ifstream* in){
 
         counter++;
     }
-    printf("%d,%d; ", predicted_right, counter);
+
+    *out << predicted_right << "," << counter << "; ";
+    //printf("%d,%d; ", predicted_right, counter);
 }
 
-void one_bit(int size, std::ifstream* in){
+void one_bit(int size, std::ifstream* in, ofstream* out){
     std::string line;
     int table[size];
     const char delim[2] = " ";
@@ -412,10 +479,12 @@ void one_bit(int size, std::ifstream* in){
         }
         counter++;
     }
-    printf("%d,%d; ", predicted_right, counter);
+
+    *out << predicted_right << "," << counter << "; ";
+    //printf("%d,%d; ", predicted_right, counter);
 }
 
-void always(std::string n_t, std::ifstream* in){
+void always(std::string n_t, std::ifstream* in, ofstream* out){
     std::string line;
     char* new_n_t = (char*) n_t.c_str();
     const char delim[2] = " ";
@@ -431,8 +500,9 @@ void always(std::string n_t, std::ifstream* in){
             predicted_right++;
         }
     }
-    //TODO: make it out put to file
-    printf("%d,%d;\n", predicted_right, counter);
+    //TODO: make it out put to file DONE
+    *out << predicted_right << "," << counter << ";" << endl;
+    //printf("%d,%d;\n", predicted_right, counter);
 }
 
 //retrieved function from:

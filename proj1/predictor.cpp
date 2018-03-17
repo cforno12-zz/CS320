@@ -39,153 +39,167 @@ int main(int argc, char** argv){
     string T = "T";
     string NT = "NT";
 
-    always(T, &input);
+    always(T, &input, &output);
 
     input.clear();
     input.seekg(0);
 
-    always(NT, &input);
+    cout << "Finished Always Taken...\n";
+
+    always(NT, &input, &output);
 
     input.clear();
     input.seekg(0);
+
+    cout << "Finished Always Non-Taken...\n";
 
     //==========================================================================
     //Bimodal Predictor wiht a single bit of history
-
-    one_bit(16, &input);
-
-    input.clear();
-    input.seekg(0);
-
-    one_bit(32, &input);
+    //myFile.seekp(-1, std::ios_base::cur);
+    one_bit(16, &input, &output);
 
     input.clear();
     input.seekg(0);
 
-    one_bit(128, &input);
+    one_bit(32, &input, &output);
 
     input.clear();
     input.seekg(0);
 
-    one_bit(256, &input);
+    one_bit(128, &input, &output);
 
     input.clear();
     input.seekg(0);
 
-    one_bit(512, &input);
+    one_bit(256, &input, &output);
 
     input.clear();
     input.seekg(0);
 
-    one_bit(1024, &input);
+    one_bit(512, &input, &output);
+
+    input.clear();
+    input.seekg(0);
+
+    one_bit(1024, &input, &output);
 
     input.clear();
     input.seekg(0);
 
 
-    one_bit(2048, &input);
+    one_bit(2048, &input, &output);
 
     input.clear();
     input.seekg(0);
 
-    cout << endl;
+    output.seekp(-1, std::ios_base::cur);
+    output<<endl;
+
+    cout << "Finished One Bit Bimodal ...\n";
+
 
     //==========================================================================
     //Bimodal Predictor with 2-bit saturating counters
 
-    two_bit(16, &input);
+    two_bit(16, &input, &output);
 
     input.clear();
     input.seekg(0);
 
-    two_bit(32, &input);
+    two_bit(32, &input, &output);
 
     input.clear();
     input.seekg(0);
 
-    two_bit(128, &input);
+    two_bit(128, &input, &output);
 
     input.clear();
     input.seekg(0);
 
-    two_bit(256, &input);
+    two_bit(256, &input, &output);
 
     input.clear();
     input.seekg(0);
 
-    two_bit(512, &input);
+    two_bit(512, &input, &output);
 
     input.clear();
     input.seekg(0);
 
 
-    two_bit(1024, &input);
+    two_bit(1024, &input, &output);
 
     input.clear();
     input.seekg(0);
 
-    two_bit(2048, &input);
+    two_bit(2048, &input, &output);
 
     input.clear();
     input.seekg(0);
 
-    cout << endl;
+    output.seekp(-1, std::ios_base::cur);
+    output << endl;
+
+    cout << "Finished Two Bit Bimodal...\n";
 
     //==========================================================================
     // Gshare Predictor
 
-    gshare(3, &input);
+    gshare(3, &input, &output);
 
     input.clear();
     input.seekg(0);
 
-    gshare(4, &input);
+    gshare(4, &input, &output);
 
     input.clear();
     input.seekg(0);
 
-    gshare(5, &input);
+    gshare(5, &input, &output);
 
     input.clear();
     input.seekg(0);
 
-    gshare(6, &input);
+    gshare(6, &input, &output);
 
     input.clear();
     input.seekg(0);
 
-    gshare(7, &input);
+    gshare(7, &input, &output);
 
     input.clear();
     input.seekg(0);
 
-    gshare(8, &input);
+    gshare(8, &input, &output);
 
     input.clear();
     input.seekg(0);
 
-    gshare(9, &input);
+    gshare(9, &input, &output);
 
     input.clear();
     input.seekg(0);
 
-    gshare(10, &input);
+    gshare(10, &input, &output);
 
     input.clear();
     input.seekg(0);
 
-    gshare(11, &input);
+    gshare(11, &input, &output);
 
     input.clear();
     input.seekg(0);
 
-    cout << endl;
+    output.seekp(-1, std::ios_base::cur);
+    output << endl;
+    cout << "Finished Gshare...\n";
 
     //==========================================================================
     //Tournament Predictor
 
-    tournament(&input);
-
+    tournament(&input, &output);
+    output << endl;
+    cout << "Finished Tournament!" << endl;
     return 0;
 }
 

@@ -1,8 +1,0 @@
-GSHARE:
-  2048 table consisted of global registers
-  GR: 9 different answers; least sig bit is the most recent T or NT
-  ADDRESS XOR GLOBAL REGISTER
-
-Tournament:
-  using gshare and 2 bit predictor
-  if gshare predicts correctly => stay in 2 bit state ELSE => move state
