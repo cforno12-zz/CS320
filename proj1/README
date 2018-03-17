@@ -1,0 +1,20 @@
+Cristobal Forno
+cforno1
+B00593480
+
+I have not done the extra credit.
+
+Everything should work.
+
+Long traces take 6 and a half minutes because I am a bad programmer. I'm so sorry.
+Short traces take 38 seconds.
+
+HOW TO RUN:
+
+To create an executable "predictors", run command:
+
+> make
+
+To use executeable run command:
+
+> ./predictors <input_file> <output_file>
