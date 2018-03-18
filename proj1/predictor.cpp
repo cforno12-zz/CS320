@@ -44,18 +44,18 @@ int main(int argc, char** argv){
     input.clear();
     input.seekg(0);
 
-    cout << "Finished Always Taken...\n";
+    //cout << "Finished Always Taken...\n";
 
     always(NT, &input, &output);
 
     input.clear();
     input.seekg(0);
 
-    cout << "Finished Always Non-Taken...\n";
+    //cout << "Finished Always Non-Taken...\n";
 
     //==========================================================================
     //Bimodal Predictor wiht a single bit of history
-    //myFile.seekp(-1, std::ios_base::cur);
+
     one_bit(16, &input, &output);
 
     input.clear();
@@ -95,7 +95,7 @@ int main(int argc, char** argv){
     output.seekp(-1, std::ios_base::cur);
     output<<endl;
 
-    cout << "Finished One Bit Bimodal ...\n";
+    //cout << "Finished One Bit Bimodal ...\n";
 
 
     //==========================================================================
@@ -140,7 +140,7 @@ int main(int argc, char** argv){
     output.seekp(-1, std::ios_base::cur);
     output << endl;
 
-    cout << "Finished Two Bit Bimodal...\n";
+    //cout << "Finished Two Bit Bimodal...\n";
 
     //==========================================================================
     // Gshare Predictor
@@ -192,14 +192,29 @@ int main(int argc, char** argv){
 
     output.seekp(-1, std::ios_base::cur);
     output << endl;
-    cout << "Finished Gshare...\n";
+    //cout << "Finished Gshare...\n";
 
     //==========================================================================
     //Tournament Predictor
 
     tournament(&input, &output);
     output << endl;
-    cout << "Finished Tournament!" << endl;
+    //cout << "Finished Tournament!" << endl;
+
+    input.clear();
+    input.seekg(0);
+
+
+    //==========================================================================
+    //Dynamic Brnach Prediction with Perceptrons
+    //Academic Paper can be found at
+    //https://www.cs.utexas.edu/~lin/papers/hpca01.pdf
+
+    //TODO: TA! UNCOMMENT THE LINE BELOW TO RUN THE EXTRA CREDIT
+
+    //perceptron(&input, &output, 1024, 22);
+
+
     return 0;
 }
 

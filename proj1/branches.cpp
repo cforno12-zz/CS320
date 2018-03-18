@@ -2,49 +2,69 @@
 #include <string.h>
 #include <limits.h>
 #include <vector>
+#include <math.h>
+#include <algorithm>
+#include <iostream>
 #include "branches.h"
 
 using namespace std;
 
-void perceptron(ifstream* in){
+void perceptron(ifstream* in, ofstream* out, int table_size, int gh_length){
     //output counters
-    //    int counter = 0;
-    //int predicted_right = 0;
+    int counter = 0;
+    int predicted_right = 0;
+
+    //table size is 512
+    //gh_length is 11
 
     //perceptron stuff
+    vector<vector<int> > perceptron_table;
     vector<int> global_history;
-    /* bit x_0 is always set to 1, providing a bias.*/
-    global_history[0] = 1;
     vector<int> weights;
-    //int threshold;
-    vector<int> perceptron_table[2048];
+    /* bit x_0 is always set to 1, providing a bias.*/
+    int threshold = 1.93*gh_length + 14;
+    int y = 0;
+
+    string taken;
+
+    int t;
+    int bias[table_size];
+    bias[0] = 1;
+    for(int i = 1; i < table_size; i++){
+        bias[i] = -1;
+    }
+
+    for(int i = 0; i < gh_length; i++){
+        weights.push_back(0);
+    }
+
+    global_history.push_back(1);
+    for(int i = 1; i < gh_length; i++){
+        global_history.push_back(-1);
+    }
+
+    for(int i = 0; i < table_size; i++){
+        perceptron_table.push_back(weights);
+    }
 
     //output (y) is a dot product of the weights and the input vector.
     /* y = w_0 + \sum_{i=1}^{n} x_i * w_i */
     // x_i is -1 (NT) or 1 (T)
-
-
 
     //parsing stuff
     string line;
     const char delim[2] = " ";
     char* token;
 
-
     while(getline(*in, line)){
         char* new_line = (char*) line.c_str();
         token = strtok(new_line, delim);
         unsigned int address = hexadecimalToDecimal(token);
-        int index = address % 2048;
+        int index = address % table_size;
         vector<int> perceptron = perceptron_table[index];
-        /* Calculating output*/
-        int y = perceptron[0];
-        for(std::vector<int>::size_type i = 1; i < perceptron.size(); i++) {
-            y += (global_history[i]*weights[i]);
-        }
+        y = bias[index];
 
         token = strtok(NULL, delim);
-        int t;
         if(strcmp(token, "NT") == 0){
             t = -1;
         } else if(strcmp(token, "T") == 0){
@@ -56,16 +76,37 @@ void perceptron(ifstream* in){
         }
 
 
+        /*y is our prediction*/
+        /* Calculating output*/
+        for(int i = 1; i < gh_length; i++) {
+            y = y + (global_history[i]*perceptron[i]);
+        }
 
-        // if(y != t || abs(y) <= threshold){
-        //     for (vector<int>::size_type i = 0; i < weights.size(); i++){
-        //         weights[i] = weights[i]+(t*global_history[i]);
-        //     }
+        /*checking if our predicton is correct*/
+        if((y >= 0 && (strcmp(token, "T")==0)) || (y < 0 && (strcmp(token, "NT") == 0))){
+            predicted_right++;
+        }
 
-        // }
+        /*updating global history bit*/
+        if(((y > 0 && t == -1) || (y < 0 && t == 1)) || (abs(y) <= threshold)){
+            bias[index] += t;
 
+            for(int i = 1; i < gh_length; i++){
+                if(t == global_history[i]){
+                    perceptron[i] = perceptron[i] + 1;
+                } else {
+                    perceptron[i] = perceptron[i] - 1;
+                }
+            }
+        }
+
+        //shifting global history register to input the branch at the least significant bit
+        std::rotate(global_history.begin(), global_history.begin()+global_history.size()-1, global_history.end());
+        global_history[0] = t;
+
+        counter++;
     }
-
+    *out << predicted_right << "," << counter << ";" << endl;
 }
 
 void tournament(ifstream* in, ofstream* out){

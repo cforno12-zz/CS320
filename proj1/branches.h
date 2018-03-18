@@ -4,6 +4,7 @@
 #ifndef BRAN_H
 #define BRAN_H
 
+void perceptron(std::ifstream* in, std::ofstream* out, int table_size, int gh_length);
 void tournament(std::ifstream* in, std::ofstream* out);
 void gshare_helper(int table[], char* branch, int index, unsigned int* history, int* predicted_right);
 unsigned int get_mask(unsigned int size);
