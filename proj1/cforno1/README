@@ -1,0 +1,38 @@
+Cristobal Forno
+cforno1
+B00593480
+
+I have done the extra credit.
+I have tried to implement the perceptron neural network.
+HOW THE PERCEPTRON WORKS AND UPDATED: (page. 3)
+    1. The branch address is hashed to produce an index i \in 0...N - 1 into the table of perceptrons.
+    2. The i th perceptron is fetched from the table into a vector
+register, P_{0...n}, of weights.
+    3. The value of y is computed as the dot product of P and
+the global history register.
+    4. The branch is predicted not taken when y is negative, or
+taken otherwise.
+    5. Once the actual outcome of the branch becomes known,
+the training algorithm uses this outcome and the value
+of y to update the weights in P .
+    6. P is written back to the i th entry in the table.
+
+
+Exact Details of how it's implemented is in the comments in the branches.cpp file.
+It takes 11,264 bits to implement.
+To run extra credit, uncomment the last line in the predictor.cpp file.
+
+Everything should work correctly.
+
+Long traces take 6 and a half minutes because I am a bad programmer. I'm so sorry.
+Short traces take 63 seconds.
+
+HOW TO RUN:
+
+To create an executable "predictors", run command:
+
+> make
+
+To use executeable run command:
+
+> ./predictors <input_file> <output_file>
