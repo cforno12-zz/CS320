@@ -1,4 +1,4 @@
-SRC=driver.cpp caches.cpp cache.h
+SRC=driver.cpp caches.cpp
 OBJ=driver.o caches.o
 EXEC=cache-sim
 CXX=g++
@@ -19,3 +19,8 @@ compress:
 	cd ../
 	mv ./proj2 ./cforno1
 	tar -czvf cforno1.tar.gz cforno1/
+
+test: ./traces
+	./$(EXEC) ./traces/trace2.txt output.txt
+	cat output.txt
+	cat ./correct_outputs/trace2_output.txt
