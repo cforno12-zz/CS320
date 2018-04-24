@@ -2,7 +2,7 @@ SRC=driver.cpp caches.cpp
 OBJ=driver.o caches.o
 EXEC=cache-sim
 CXX=g++
-FLAGS= -c -I=. -Wall
+FLAGS= -c -I=. -Wall -g
 
 all: link
 
