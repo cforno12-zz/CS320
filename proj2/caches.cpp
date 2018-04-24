@@ -1,7 +1,5 @@
 #include "caches.hpp"
 
-
-
 void print_vector(std::vector<int> path){
     for (std::vector<int>::const_iterator i = path.begin(); i != path.end(); ++i)
         std::cout << *i << " ";
@@ -38,7 +36,7 @@ void set_associative(std::string instruct, unsigned int address, int* counter, s
     bool hit = false;
     int hit_way = 0;
     for(int i = 0; i < way; i++){
-        if(cache.at(index).at(i) == tag){
+        if(cache.at(index).at(i) == (int) tag){
             (*counter)++;
             hit = true;
             hit_way = i;
@@ -53,7 +51,6 @@ void set_associative(std::string instruct, unsigned int address, int* counter, s
     Index_tuple* victim = new Index_tuple();
     victim->set = 0;
     victim->way = 0;
-    bool cold = false;
     if(hit){
         delete victim;
         store_me->way = hit_way;
@@ -69,7 +66,7 @@ void set_associative(std::string instruct, unsigned int address, int* counter, s
         if(!update){
             lru_queue.push_front(store_me);
         }
-    } else if(lru_queue.size() == (num_slots * way)){
+    } else if(lru_queue.size() == (int)(num_slots * way)){
         //this is a miss and the queue is full
         for (std::deque<Index_tuple*>::const_iterator i = lru_queue.end(); i != lru_queue.begin(); --i){
             if(store_me->set == (*i)->set){
@@ -83,7 +80,6 @@ void set_associative(std::string instruct, unsigned int address, int* counter, s
         cache[victim->set][victim->way] = tag;
     } else {
         //this is a miss and the queue is not full
-        cold = true;
         delete victim;
         for(int i = 0; i < way; i++){
             if(cache[index][i] == -1){
