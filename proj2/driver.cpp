@@ -63,7 +63,7 @@ int main(int argc, char** argv){
     int cache_size_16K = 16 * 1024;
     int cache_line_size = 32;
 
-    int rows_of_set_2 = (cache_size_16K)/(cache_line_size*2);
+    int rows_of_set_2 =(cache_size_16K)/(cache_line_size*2);
     int rows_of_set_4 = (cache_size_16K)/(cache_line_size*4);
     int rows_of_set_8 = (cache_size_16K)/(cache_line_size*8);
     int rows_of_set_16 = (cache_size_16K)/(cache_line_size*16);
@@ -73,10 +73,15 @@ int main(int argc, char** argv){
     vector< vector<int> > set_cache_8(rows_of_set_8, vector<int> (8, -1));
     vector< vector<int> > set_cache_16(rows_of_set_16, vector<int> (16, -1));
 
-    deque<Index_tuple*> lru_set_queue_2;
-    deque<Index_tuple*> lru_set_queue_4;
-    deque<Index_tuple*> lru_set_queue_8;
-    deque<Index_tuple*> lru_set_queue_16;
+    vector< deque<int> > lru_set_queue_2(rows_of_set_2, deque<int> (2, -1));
+    vector< deque<int> > lru_set_queue_4(rows_of_set_4, deque<int> (4, -1));
+    vector< deque<int> > lru_set_queue_8(rows_of_set_8, deque<int> (8, -1));
+    vector< deque<int> > lru_set_queue_16(rows_of_set_16, deque<int> (16, -1));
+
+    // deque<Index_tuple*> lru_set_queue_2;
+    // deque<Index_tuple*> lru_set_queue_4;
+    // deque<Index_tuple*> lru_set_queue_8;
+    // deque<Index_tuple*> lru_set_queue_16;
     //==========================================================================
     //Fully Associative variables
 
