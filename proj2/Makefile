@@ -13,7 +13,7 @@ compile: $(SRC)
 	$(CXX) $(FLAGS) $(SRC)
 
 clean:
-	rm -f $(EXEC) $(OBJ)
+	rm -rf $(EXEC) $(OBJ) *.dSYM
 
 compress:
 	cd ../
@@ -24,3 +24,6 @@ test: ./traces
 	./$(EXEC) ./traces/trace2.txt output.txt
 	cat output.txt
 	cat ./correct_outputs/trace2_output.txt
+
+valgrind:
+	valgrind --leak-check=yes ./cache-sim ./traces/trace2.txt output.txt
