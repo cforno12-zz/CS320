@@ -81,10 +81,24 @@ void next_line_prefetch(std::string instruct, unsigned int address, int &counter
     }
 }
 
+void fully_associative(std::string instruct, unsigned int address, int& counter, std::vector< std::vector<int> > &cache, std::vector< std::deque<int> > &lru_queue, int ways){
+
+    int byte_offset = 5;
+    int num_slots = 1;
+    unsigned int index = (address >> byte_offset) % (num_slots);
+    unsigned int tag = address >> (unsigned int) (log2(num_slots) + byte_offset);
+
+    int hit_way = 0;
+    bool hit = false;
+    hit_helper(hit, hit_way, tag, counter, index, ways, cache);
+    lru(index, tag, ways, cache, lru_queue, hit, hit_way);
+}
 
 
 
 void hit_helper(bool &hit, int &hit_way, int tag, int &counter, int index, int way, std::vector< std::vector<int> > &cache){
+    // std::cout << cache[index][0] << std::endl;
+    // std::cout << tag << std::endl;
     for(int i = 0; i < way; i++){
         if(cache[index][i] == (int) tag){
             counter++;
@@ -95,7 +109,7 @@ void hit_helper(bool &hit, int &hit_way, int tag, int &counter, int index, int w
     }
 }
 
-void lru(int index, int tag, int way, std::vector < std::vector<int> > &cache, std::vector<std::deque<int> > &lru_queue, bool hit, int hit_way){
+void lru(int index, int tag, int way, std::vector < std::vector<int> > &cache, std::vector< std::deque<int> > &lru_queue, bool hit, int hit_way){
     //is the set full?
     bool empty = false;
     for (int i = 0; i < way; i++){

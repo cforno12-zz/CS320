@@ -80,9 +80,13 @@ int main(int argc, char** argv){
     //==========================================================================
     //Fully Associative variables
 
-    // int fully_counter = 0;
+    int fully_ways = (cache_size_16K)/(cache_line_size);
 
-    // vector<int> fully_cache = 0;
+    int fully_counter = 0;
+
+    vector< vector<int> > fully_cache(1, vector<int> (fully_ways, -1));
+
+    vector< deque<int> > fully_lru(1);
 
     //===========================================================================
     //SET ASSOCIATIVE WITH NO ALLOCATION ON A MISS variables
@@ -139,7 +143,7 @@ int main(int argc, char** argv){
 
     //==========================================================================
     //begin parsing file
-    while(getline(input, line)){
+    while(getline(input, line) ){
         char* new_line = (char*) line.c_str();
         buffer = strtok(new_line, delim);
         string instruction(buffer);
@@ -149,9 +153,6 @@ int main(int argc, char** argv){
         unsigned int address;
         buffer02 << hex << buffer;
         buffer02 >> address;
-
-        //INSTRCTION is instruction variable
-        //ADDRESS is address variable
 
         //DIRECT MAPPING
         direct_mapped(instruction, address, 1, direct_map_cache_1, &size_of_1);
@@ -164,7 +165,7 @@ int main(int argc, char** argv){
         set_associative(instruction, address, &set_counter_8, set_cache_8, 8, lru_set_queue_8, rows_of_set_8, false);
         set_associative(instruction, address, &set_counter_16, set_cache_16, 16, lru_set_queue_16, rows_of_set_16, false);
         //FULLY ASSOCIATIVE
-        //fully_associative(instruction, address, &)
+        fully_associative(instruction, address, fully_counter, fully_cache, fully_lru, fully_ways);
         //SET ASSOCIATIVE WITH NO ALLOCATION ON A MISS
         set_associative(instruction, address, &set_counter_2_no_alloc, set_cache_2_no_alloc, 2, lru_set_queue_2_no_alloc, rows_of_set_2, true);
         set_associative(instruction, address, &set_counter_4_no_alloc, set_cache_4_no_alloc, 4, lru_set_queue_4_no_alloc, rows_of_set_4, true);
@@ -200,7 +201,7 @@ int main(int argc, char** argv){
     output << set_counter_16 << "," <<access_counter << "; " << endl;
 
     //printing set associative no alloc
-    output << "BLANK"<<endl;
+    output << fully_counter << ", " << access_counter <<endl;
     output << "BLANK"<<endl;
 
     //NO ALLOC
@@ -215,11 +216,9 @@ int main(int argc, char** argv){
     output << prefetch_always_8 << "," << access_counter << "; ";
     output << prefetch_always_16 << "," << access_counter << "; " << endl;
 
+    //PREFETCH ON MISS
     output << prefetch_always_2_miss << "," << access_counter << "; ";
     output << prefetch_always_4_miss << "," << access_counter << "; ";
     output << prefetch_always_8_miss << "," << access_counter << "; ";
     output << prefetch_always_16_miss << "," << access_counter << "; " << endl;
-
-    //PREFETCH ALWAYS
-
 }
