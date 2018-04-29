@@ -25,5 +25,11 @@ test: ./traces
 	cat output.txt
 	cat ./correct_outputs/trace2_output.txt
 
+test_all: ./traces
+	./$(EXEC) ./traces/trace1.txt output1.txt
+	./$(EXEC) ./traces/trace2.txt output2.txt
+	./$(EXEC) ./traces/trace3.txt output3.txt
+
+
 valgrind:
 	valgrind --leak-check=yes ./cache-sim ./traces/trace2.txt output.txt

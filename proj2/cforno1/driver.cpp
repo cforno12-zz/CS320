@@ -198,27 +198,28 @@ int main(int argc, char** argv){
     output << set_counter_2 << "," << access_counter << "; ";
     output << set_counter_4 << "," << access_counter << "; ";
     output << set_counter_8 << "," <<access_counter << "; ";
-    output << set_counter_16 << "," <<access_counter << "; " << endl;
+    output << set_counter_16 << "," <<access_counter << ";" << endl;
 
     //printing set associative no alloc
-    output << fully_counter << ", " << access_counter <<endl;
-    output << "BLANK"<<endl;
+    output << fully_counter << "," << access_counter <<  ";"<<endl;
+    output << "0," << access_counter << "; "<<endl;
+
 
     //NO ALLOC
     output << set_counter_2_no_alloc << "," << access_counter << "; ";
     output << set_counter_4_no_alloc << "," << access_counter << "; ";
     output << set_counter_8_no_alloc << "," << access_counter << "; ";
-    output << set_counter_16_no_alloc << "," << access_counter << "; " << endl;
+    output << set_counter_16_no_alloc << "," << access_counter << ";" << endl;
 
     //ALWAYS PREFETCH
     output << prefetch_always_2 << "," << access_counter << "; ";
     output << prefetch_always_4 << "," << access_counter << "; ";
     output << prefetch_always_8 << "," << access_counter << "; ";
-    output << prefetch_always_16 << "," << access_counter << "; " << endl;
+    output << prefetch_always_16 << "," << access_counter << ";" << endl;
 
     //PREFETCH ON MISS
     output << prefetch_always_2_miss << "," << access_counter << "; ";
     output << prefetch_always_4_miss << "," << access_counter << "; ";
     output << prefetch_always_8_miss << "," << access_counter << "; ";
-    output << prefetch_always_16_miss << "," << access_counter << "; " << endl;
+    output << prefetch_always_16_miss << "," << access_counter << ";" << endl;
 }
